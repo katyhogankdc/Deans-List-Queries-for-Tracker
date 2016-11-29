@@ -68,16 +68,24 @@ union all
 Referrals more than 30 days old that have not been resolved
 ```SQL
 select 
-i.category
-,i.incidentid
+i.studentschoolid as student_number
+,sch.abbreviation as school_name
+,i.category
+,i.incidentid as error_group
 ,i.isreferral
-,i.CreateTS
+,i.CreateTS as error_date 
+,cal.yearid
+,i.gradelevelshort as grade_level
+,s.lastfirst as lastfirst
 ,i.CloseTS
+,'Unresolved referrals older than 30 days' as error
+,'DeansList' as sourcesystem
+3 errorid
 from
 custom.custom_dlincidents_raw i 
-	where isreferral = 'True'
-	and i.CloseTS IS NULL
-	and i.CreateTS < '10-OCT-2016'
+    where isreferral = 'True'
+    and i.CloseTS IS NULL
+    and i.CreateTS < '10-OCT-2016'
 ```
 
 Missing infraction
