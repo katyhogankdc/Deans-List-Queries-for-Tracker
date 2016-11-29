@@ -10,7 +10,7 @@ p.penaltyname
 ,i.incidentid
 ,p.startdate
 ,p.enddate
-,i.student_number
+,i.schoolstudentid
 from
 custom.custom_dlincidents_raw i 
 left join custom.custom_dlpenalties_raw p on p.incidentid = i.incidentid
