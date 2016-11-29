@@ -4,26 +4,29 @@ Queries from DeansList using PS language
 Overlapping OSS - either starting on the same day or overlapping dates 
 
 ```SQL
-
 select 
-p.penaltyname
-,i.incidentid
-,p.startdate
-,p.enddate
-,i.student_number
+p.penaltyname as error_group
+,i.incidentid 
+,schoolid as school_name
+,p.startdate as error_date
+,p.enddate 
+,i.studentschoolid as student_number
+,'Overlapping OSS' as error, 
+'DeansList' as sourcesystem
+1 errorid 
 from
 custom.custom_dlincidents_raw i 
 left join custom.custom_dlpenalties_raw p on p.incidentid = i.incidentid
-	and p.startdate = p.startdate
-	and p.enddate = p.enddate
-	where penaltyname = 'OSS'
-inner join(select penaltyname, startdate, incidentid, enddate, student_number
-	from custom.custom_dlpenalties_raw p 
-	where penaltyname = 'OSS') sub on
-	sub.student_number = i.student_number
-	and sub.incidentid != i.incidentid 
-	and p.startdate = sub.startdate
-	and p.enddate = sub.enddate
+    and p.startdate = p.startdate
+    and p.enddate = p.enddate
+    where penaltyname = 'OSS'
+inner join(select penaltyname, startdate, incidentid, enddate, studentschoolid
+    from custom.custom_dlpenalties_raw p 
+    where penaltyname = 'OSS') sub on
+    sub.studentschoolid = i.studentschoolid 
+    and sub.incidentid != i.incidentid 
+    and p.startdate = sub.startdate
+    and p.enddate = sub.enddate
 where p.penaltyname = 'OSS'
 ```
 
