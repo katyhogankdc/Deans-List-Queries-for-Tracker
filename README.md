@@ -44,16 +44,22 @@ i.incidentid as error_group
 ,i.schoolid as school_name
 ,i.gradelevelshort as grade_level
 ,i.issuets as error_date
+,sch.abbreviation as school_name 
 ,'1 incident ID with multiple incidents' as error
 ,'DeansList' as sourcesystem
-2 errorid
 ,count(i.incidentid) as numoccurences
+2 error id 
 from
 custom.custom_dlincidents_raw i 
 left join custom.custom_dlpenalties_raw p on p.incidentid = i.incidentid
+join custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
+join powerschool.powerschool_schools sch on sch.schoolnumber = sb.psschoolid
+join powerschool.powerschool_students s on s.student_number = i.studentschoolid
      where penaltyname in ('OSS', 'Expulsion')
      group by i.incidentid, i.studentschoolid
      having (count(i.incidentid) > 1)
+
+union all 
 ```
 
 Referrals more than 30 days old that have not been resolved
