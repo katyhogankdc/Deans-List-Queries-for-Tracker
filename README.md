@@ -10,17 +10,17 @@ p.penaltyname
 ,i.incidentid
 ,p.startdate
 ,p.enddate
-,i.schoolstudentid
+,i.student_number
 from
 custom.custom_dlincidents_raw i 
 left join custom.custom_dlpenalties_raw p on p.incidentid = i.incidentid
 	and p.startdate = p.startdate
 	and p.enddate = p.enddate
 	where penaltyname = 'OSS'
-inner join(select penaltyname, startdate, incidentid, enddate, studentschoolid
+inner join(select penaltyname, startdate, incidentid, enddate, student_number
 	from custom.custom_dlpenalties_raw p 
 	where penaltyname = 'OSS') sub on
-	sub.studentschoolid = i.studentschoolid 
+	sub.student_number = i.student_number
 	and sub.incidentid != i.incidentid 
 	and p.startdate = sub.startdate
 	and p.enddate = sub.enddate
