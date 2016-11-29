@@ -13,10 +13,13 @@ p.penaltyname as error_group
 ,i.studentschoolid as student_number
 ,'Overlapping OSS' as error, 
 'DeansList' as sourcesystem
-1 errorid 
+1 ERRORID 
 from
 custom.custom_dlincidents_raw i 
 left join custom.custom_dlpenalties_raw p on p.incidentid = i.incidentid
+join custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
+join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
+join powerschool.powerschool_students s on s.student_number = i.studentschoolid
     and p.startdate = p.startdate
     and p.enddate = p.enddate
     where penaltyname = 'OSS'
@@ -28,18 +31,29 @@ inner join(select penaltyname, startdate, incidentid, enddate, studentschoolid
     and p.startdate = sub.startdate
     and p.enddate = sub.enddate
 where p.penaltyname = 'OSS'
+
+union all 
 ```
 
 1 incident with OSS and expulsion - based on Incident ID
 
 ```SQL
 select 
-p.penaltyname
-,i.incidentid
+i.incidentid as error_group 
+,i.studentschoolid as student_number
+,i.schoolid as school_name
+,i.gradelevelshort as grade_level
+,i.issuets as error_date
+,'1 incident ID with multiple incidents' as error
+,'DeansList' as sourcesystem
+2 errorid
+,count(i.incidentid) as numoccurences
 from
 custom.custom_dlincidents_raw i 
 left join custom.custom_dlpenalties_raw p on p.incidentid = i.incidentid
-	 where penaltyname in ('OSS', 'Expulsion')
+     where penaltyname in ('OSS', 'Expulsion')
+     group by i.incidentid, i.studentschoolid
+     having (count(i.incidentid) > 1)
 ```
 
 Referrals more than 30 days old that have not been resolved
