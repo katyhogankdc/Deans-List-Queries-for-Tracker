@@ -87,6 +87,8 @@ custom.custom_dlincidents_raw i
     where isreferral = 'True'
     and i.CloseTS IS NULL
     and i.CreateTS < '10-OCT-2016'
+    
+union all 
 ```
 
 Missing infraction
@@ -105,6 +107,8 @@ i.studentschoolid as student_number
 4 errorid
 from custom.custom_dlincidents_raw
 where infraction IS NULL
+
+union all
 ```
 
 Missing injury type 
@@ -126,5 +130,7 @@ from custom.custom_dlincidents_raw
 where injurytype IS NULL 
 and infraction in ('Bullying', 'Fighting', 'Sexual Misconduct or Harrassment', 
 'Theft', 'Threatening Physical Harm', 'Violent Incident (WITH physical injury) (VIOWINJ)')
+
+union all
 ```
 
