@@ -21,9 +21,15 @@ left join custom.custom_dlpenalties_raw p on p.incidentid = i.incidentid
 join custom.custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
 join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
-    and p.startdate = p.startdate
-    and p.enddate = p.enddate
-    where penaltyname = 'OSS'
+JOIN (SELECT DISTINCT
+        CASE 
+            WHEN DATEPART(MM,CD.DATE_VALUE)>=7 THEN RIGHT(DATEPART(YY,CD.DATE_VALUE),2)+10
+            WHEN DATEPART(MM,CD.DATE_VALUE)<=6 THEN RIGHT(DATEPART(YY,CD.DATE_VALUE),2)+9
+            ELSE NULL 
+        END YEARID
+        ,DATE_VALUE
+        FROM POWERSCHOOL.POWERSCHOOL_CALENDAR_DAY CD
+        ) CAL ON CAL.DATE_VALUE = I.CREATETS
 inner join(select penaltyname, startdate, incidentid, enddate, studentschoolid
     from custom.custom_dlpenalties_raw p 
     where penaltyname = 'OSS') sub on
@@ -31,9 +37,11 @@ inner join(select penaltyname, startdate, incidentid, enddate, studentschoolid
     and sub.incidentid != i.incidentid 
     and p.startdate = sub.startdate
     and p.enddate = sub.enddate
+
 where p.penaltyname = 'OSS'
 
 union all 
+
 ```
 
 1 incident with OSS and expulsion - based on Incident ID
@@ -57,6 +65,15 @@ left join custom.custom_dlpenalties_raw p on p.incidentid = i.incidentid
 join custom.custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
 join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
+JOIN (SELECT DISTINCT
+        CASE 
+            WHEN DATEPART(MM,CD.DATE_VALUE)>=7 THEN RIGHT(DATEPART(YY,CD.DATE_VALUE),2)+10
+            WHEN DATEPART(MM,CD.DATE_VALUE)<=6 THEN RIGHT(DATEPART(YY,CD.DATE_VALUE),2)+9
+            ELSE NULL 
+        END YEARID
+        ,DATE_VALUE
+        FROM POWERSCHOOL.POWERSCHOOL_CALENDAR_DAY CD
+        ) CAL ON CAL.DATE_VALUE = I.CREATETS
      where penaltyname in ('OSS', 'Expulsion')
      group by i.incidentid, i.studentschoolid
      having (count(i.incidentid) > 1)
@@ -82,11 +99,21 @@ custom.custom_dlincidents_raw i
 join custom.custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
 join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
+JOIN (SELECT DISTINCT
+        CASE 
+            WHEN DATEPART(MM,CD.DATE_VALUE)>=7 THEN RIGHT(DATEPART(YY,CD.DATE_VALUE),2)+10
+            WHEN DATEPART(MM,CD.DATE_VALUE)<=6 THEN RIGHT(DATEPART(YY,CD.DATE_VALUE),2)+9
+            ELSE NULL 
+        END YEARID
+        ,DATE_VALUE
+        FROM POWERSCHOOL.POWERSCHOOL_CALENDAR_DAY CD
+        ) CAL ON CAL.DATE_VALUE = I.CREATETS
     where isreferral = 'True'
     and i.CloseTS IS NULL
     and i.CreateTS < '10-OCT-2016'
 
 union all 
+
 ```
 
 Missing infraction
@@ -94,19 +121,27 @@ Missing infraction
 select 
 i.studentschoolid as student_number
 ,i.schoolid as school_name
-,i.infraction as error_group
+,i.incidentid as error_group
 ,i.issuets as error_date
 ,cal.yearid as yearid
 ,i.gradelevelshort as grade_level
 ,s.lastfirst as lastfirst
 ,'Missing Infraction' as error
 ,'DeansList' as sourcesystem,
-,incidentid
 4 errorid
 from custom.custom_dlincidents_raw
 join custom.custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
 join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
+JOIN (SELECT DISTINCT
+        CASE 
+            WHEN DATEPART(MM,CD.DATE_VALUE)>=7 THEN RIGHT(DATEPART(YY,CD.DATE_VALUE),2)+10
+            WHEN DATEPART(MM,CD.DATE_VALUE)<=6 THEN RIGHT(DATEPART(YY,CD.DATE_VALUE),2)+9
+            ELSE NULL 
+        END YEARID
+        ,DATE_VALUE
+        FROM POWERSCHOOL.POWERSCHOOL_CALENDAR_DAY CD
+        ) CAL ON CAL.DATE_VALUE = I.CREATETS
 where infraction IS NULL
 
 union all
@@ -129,6 +164,15 @@ from custom.custom_dlincidents_raw
 join custom.custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
 join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
+JOIN (SELECT DISTINCT
+        CASE 
+            WHEN DATEPART(MM,CD.DATE_VALUE)>=7 THEN RIGHT(DATEPART(YY,CD.DATE_VALUE),2)+10
+            WHEN DATEPART(MM,CD.DATE_VALUE)<=6 THEN RIGHT(DATEPART(YY,CD.DATE_VALUE),2)+9
+            ELSE NULL 
+        END YEARID
+        ,DATE_VALUE
+        FROM POWERSCHOOL.POWERSCHOOL_CALENDAR_DAY CD
+        ) CAL ON CAL.DATE_VALUE = I.CREATETS
 where injurytype IS NULL 
 and infraction in ('Bullying', 'Fighting', 'Sexual Misconduct or Harrassment', 
 'Theft', 'Threatening Physical Harm', 'Violent Incident (WITH physical injury) (VIOWINJ)')
