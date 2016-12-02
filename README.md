@@ -50,7 +50,7 @@ i.studentschoolid as student_number
 ,'1 incident ID with multiple incidents' as error
 ,'DeansList' as sourcesystem
 ,count(i.incidentid) as numoccurences,
-2 error id 
+2 errorid 
 from
 custom.custom_dlincidents_raw i 
 left join custom.custom_dlpenalties_raw p on p.incidentid = i.incidentid
