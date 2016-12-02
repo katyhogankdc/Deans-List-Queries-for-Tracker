@@ -74,7 +74,7 @@ JOIN (SELECT DISTINCT
         FROM POWERSCHOOL.POWERSCHOOL_CALENDAR_DAY CD
         ) CAL ON CAL.DATE_VALUE = I.CREATETS
      where penaltyname in ('OSS', 'Expulsion')
-     group by i.incidentid, i.studentschoolid
+     group by i.incidentid, i.studentschoolid, i.schoolid, i.issuets, cal.yearid, i.gradelevelshort, s.lastfirst
      having (count(i.incidentid) > 1)
 
 union all 
