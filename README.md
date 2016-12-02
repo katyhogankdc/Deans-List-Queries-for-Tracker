@@ -92,9 +92,17 @@ custom.custom_dlincidents_raw i
 Missing infraction
 ```SQL
 select 
-infraction
+i.studentschoolid as student_number
+,sch.abbreviation as school_name
+,i.infraction as error_group
+,i.issuets as error_date
+,cal.yearid
+,i.gradelevelshort as grade_level
+,s.lastfirst as lastfirst
+,'Missing Infraction' as error
+,'DeansList' as sourcesystem
 ,incidentid
-,studentschoolid
+4 errorid
 from custom.custom_dlincidents_raw
 where infraction IS NULL
 ```
