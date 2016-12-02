@@ -6,7 +6,7 @@ Overlapping OSS - either starting on the same day or overlapping dates
 ```SQL
 select 
 i.studentschoolid as student_number
-,schoolid as school_name
+,i.schoolid as school_name
 ,p.penaltyname as error_group
 ,p.startdate as error_date
 ,cal.yearid
@@ -70,7 +70,7 @@ Referrals more than 30 days old that have not been resolved
 ```SQL
 select 
 i.studentschoolid as student_number
-,sch.abbreviation as school_name
+,i.schoolid as school_name
 ,i.category
 ,i.incidentid as error_group
 ,i.isreferral
@@ -93,7 +93,7 @@ Missing infraction
 ```SQL
 select 
 i.studentschoolid as student_number
-,sch.abbreviation as school_name
+,i.schoolid as school_name
 ,i.infraction as error_group
 ,i.issuets as error_date
 ,cal.yearid
@@ -111,7 +111,7 @@ Missing injury type
 ```SQL
 select 
 i.studentschoolid as student_number
-,sch.abbreviation as school_name
+,i.schoolid as school_name
 ,i.injurytype as error_group
 ,i.issuets as error_date
 ,cal.yearid
