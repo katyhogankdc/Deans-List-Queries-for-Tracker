@@ -69,14 +69,11 @@ Referrals more than 30 days old that have not been resolved
 select 
 i.studentschoolid as student_number
 ,i.schoolid as school_name
-,i.category
 ,i.incidentid as error_group
-,i.isreferral
 ,i.CreateTS as error_date 
 ,cal.yearid
 ,i.gradelevelshort as grade_level
 ,s.lastfirst as lastfirst
-,i.CloseTS
 ,'Unresolved referrals older than 30 days' as error
 ,'DeansList' as sourcesystem
 3 errorid
@@ -88,7 +85,7 @@ join powerschool.powerschool_students s on s.student_number = i.studentschoolid
     where isreferral = 'True'
     and i.CloseTS IS NULL
     and i.CreateTS < '10-OCT-2016'
-    
+
 union all 
 ```
 
@@ -120,13 +117,11 @@ Missing injury type
 select 
 i.studentschoolid as student_number
 ,i.schoolid as school_name
-,i.injurytype as error_group
+,i.incidentid as error_group
 ,i.issuets as error_date
 ,cal.yearid
 ,i.gradelevelshort as grade_level
 ,s.lastfirst as lastfirst
-,i.infraction
-,i.incidentid
 ,'Missing injury type' as error
 ,'DeansList' as sourcesystem
 5 errorid
