@@ -18,7 +18,7 @@ i.studentschoolid as student_number
 from
 custom.custom_dlincidents_raw i 
 left join custom.custom_dlpenalties_raw p on p.incidentid = i.incidentid
-join custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
+join custom.custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
 join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
     and p.startdate = p.startdate
@@ -54,7 +54,7 @@ i.studentschoolid as student_number
 from
 custom.custom_dlincidents_raw i 
 left join custom.custom_dlpenalties_raw p on p.incidentid = i.incidentid
-join custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
+join custom.custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
 join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
      where penaltyname in ('OSS', 'Expulsion')
@@ -79,7 +79,7 @@ i.studentschoolid as student_number
 3 errorid
 from
 custom.custom_dlincidents_raw i 
-join custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
+join custom.custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
 join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
     where isreferral = 'True'
@@ -104,7 +104,7 @@ i.studentschoolid as student_number
 ,incidentid
 4 errorid
 from custom.custom_dlincidents_raw
-join custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
+join custom.custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
 join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
 where infraction IS NULL
@@ -126,7 +126,7 @@ i.studentschoolid as student_number
 ,'DeansList' as sourcesystem,
 5 errorid
 from custom.custom_dlincidents_raw
-join custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
+join custom.custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
 join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
 where injurytype IS NULL 
