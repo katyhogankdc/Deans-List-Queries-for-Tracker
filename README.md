@@ -42,12 +42,13 @@ union all
 
 ```SQL
 select 
-i.incidentid as error_group 
-,i.studentschoolid as student_number
+i.studentschoolid as student_number
 ,i.schoolid as school_name
-,i.gradelevelshort as grade_level
+,i.incidentid as error_group 
 ,i.issuets as error_date
-,sch.abbreviation as school_name 
+,cal.yearid
+,i.gradelevelshort as grade_level
+,s.lastfirst as lastfirst
 ,'1 incident ID with multiple incidents' as error
 ,'DeansList' as sourcesystem
 ,count(i.incidentid) as numoccurences
