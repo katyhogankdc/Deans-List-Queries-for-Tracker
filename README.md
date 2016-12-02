@@ -9,7 +9,7 @@ i.studentschoolid as student_number
 ,i.schoolid as school_name
 ,i.incidentid as error_group
 ,p.startdate as error_date
-,cal.yearid
+,cal.yearid as yearid
 ,i.gradelevelshort as grade_level
 ,s.lastfirst as lastfirst
 ,'Overlapping OSS' as error, 
@@ -44,7 +44,7 @@ i.studentschoolid as student_number
 ,i.schoolid as school_name
 ,i.incidentid as error_group 
 ,i.issuets as error_date
-,cal.yearid
+,cal.yearid as yearid
 ,i.gradelevelshort as grade_level
 ,s.lastfirst as lastfirst
 ,'1 incident ID with multiple incidents' as error
@@ -71,7 +71,7 @@ i.studentschoolid as student_number
 ,i.schoolid as school_name
 ,i.incidentid as error_group
 ,i.CreateTS as error_date 
-,cal.yearid
+,cal.yearid as yearid
 ,i.gradelevelshort as grade_level
 ,s.lastfirst as lastfirst
 ,'Unresolved referrals older than 30 days' as error
@@ -96,7 +96,7 @@ i.studentschoolid as student_number
 ,i.schoolid as school_name
 ,i.infraction as error_group
 ,i.issuets as error_date
-,cal.yearid
+,cal.yearid as yearid
 ,i.gradelevelshort as grade_level
 ,s.lastfirst as lastfirst
 ,'Missing Infraction' as error
@@ -119,7 +119,7 @@ i.studentschoolid as student_number
 ,i.schoolid as school_name
 ,i.incidentid as error_group
 ,i.issuets as error_date
-,cal.yearid
+,cal.yearid as yearid
 ,i.gradelevelshort as grade_level
 ,s.lastfirst as lastfirst
 ,'Missing injury type' as error
