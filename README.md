@@ -40,8 +40,7 @@ inner join(select penaltyname, startdate, incidentid, enddate, studentschoolid
 
 where p.penaltyname = 'OSS'
 
-union all 
-
+union all
 ```
 
 1 incident with OSS and expulsion - based on Incident ID
@@ -113,7 +112,6 @@ JOIN (SELECT DISTINCT
     and i.CreateTS < '10-OCT-2016'
 
 union all 
-
 ```
 
 Missing infraction
@@ -129,7 +127,7 @@ i.studentschoolid as student_number
 ,'Missing Infraction' as error
 ,'DeansList' as sourcesystem,
 4 errorid
-from custom.custom_dlincidents_raw
+from custom.custom_dlincidents_raw i
 join custom.custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
 join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
@@ -145,6 +143,7 @@ JOIN (SELECT DISTINCT
 where infraction IS NULL
 
 union all
+
 ```
 
 Missing injury type 
@@ -160,7 +159,7 @@ i.studentschoolid as student_number
 ,'Missing injury type' as error
 ,'DeansList' as sourcesystem,
 5 errorid
-from custom.custom_dlincidents_raw
+from custom.custom_dlincidents_raw i
 join custom.custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
 join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
