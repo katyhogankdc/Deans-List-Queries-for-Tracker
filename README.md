@@ -110,10 +110,18 @@ where infraction IS NULL
 Missing injury type 
 ```SQL
 select 
-injurytype
-,infraction
-,studentschoolid
-,incidentid
+i.studentschoolid as student_number
+,sch.abbreviation as school_name
+,i.injurytype as error_group
+,i.issuets as error_date
+,cal.yearid
+,i.gradelevelshort as grade_level
+,s.lastfirst as lastfirst
+,i.infraction
+,i.incidentid
+,'Missing injury type' as error
+,'DeansList' as sourcesystem
+5 errorid
 from custom.custom_dlincidents_raw
 where injurytype IS NULL 
 and infraction in ('Bullying', 'Fighting', 'Sexual Misconduct or Harrassment', 
