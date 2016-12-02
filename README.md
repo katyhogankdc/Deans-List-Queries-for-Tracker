@@ -7,13 +7,11 @@ Overlapping OSS - either starting on the same day or overlapping dates
 select 
 i.studentschoolid as student_number
 ,i.schoolid as school_name
-,p.penaltyname as error_group
+,i.incidentid as error_group
 ,p.startdate as error_date
 ,cal.yearid
 ,i.gradelevelshort as grade_level
 ,s.lastfirst as lastfirst
-,i.incidentid 
-,p.enddate 
 ,'Overlapping OSS' as error, 
 'DeansList' as sourcesystem
 1 ERRORID 
