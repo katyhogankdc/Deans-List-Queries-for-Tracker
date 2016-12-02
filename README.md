@@ -40,7 +40,6 @@ inner join(select penaltyname, startdate, incidentid, enddate, studentschoolid
 
 where p.penaltyname = 'OSS'
 
-union all
 ```
 
 1 incident with OSS and expulsion - based on Incident ID
@@ -77,7 +76,6 @@ JOIN (SELECT DISTINCT
      group by i.incidentid, i.studentschoolid, i.schoolid, i.issuets, cal.yearid, i.gradelevelshort, s.lastfirst
      having (count(i.incidentid) > 1)
 
-union all 
 ```
 
 Referrals more than 30 days old that have not been resolved
@@ -111,7 +109,6 @@ JOIN (SELECT DISTINCT
     and i.CloseTS IS NULL
     and i.CreateTS < '10-OCT-2016'
 
-union all 
 ```
 
 Missing infraction
@@ -141,8 +138,6 @@ JOIN (SELECT DISTINCT
         FROM POWERSCHOOL.POWERSCHOOL_CALENDAR_DAY CD
         ) CAL ON CAL.DATE_VALUE = I.CREATETS
 where infraction IS NULL
-
-union all
 
 ```
 
@@ -176,6 +171,5 @@ where injurytype IS NULL
 and infraction in ('Bullying', 'Fighting', 'Sexual Misconduct or Harrassment', 
 'Theft', 'Threatening Physical Harm', 'Violent Incident (WITH physical injury) (VIOWINJ)')
 
-union all
 ```
 
