@@ -21,7 +21,7 @@ from
 custom.custom_dlincidents_raw i 
 left join custom.custom_dlpenalties_raw p on p.incidentid = i.incidentid
 join custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
-join powerschool.powerschool_schools sch on sch.school_number = i.schoolid
+join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
     and p.startdate = p.startdate
     and p.enddate = p.enddate
@@ -57,7 +57,7 @@ from
 custom.custom_dlincidents_raw i 
 left join custom.custom_dlpenalties_raw p on p.incidentid = i.incidentid
 join custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
-join powerschool.powerschool_schools sch on sch.school_number = i.studentid
+join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
      where penaltyname in ('OSS', 'Expulsion')
      group by i.incidentid, i.studentschoolid
@@ -85,7 +85,7 @@ i.studentschoolid as student_number
 from
 custom.custom_dlincidents_raw i 
 join custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
-join powerschool.powerschool_schools sch on sch.school_number = i.studentid
+join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
     where isreferral = 'True'
     and i.CloseTS IS NULL
@@ -110,7 +110,7 @@ i.studentschoolid as student_number
 4 errorid
 from custom.custom_dlincidents_raw
 join custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
-join powerschool.powerschool_schools sch on sch.school_number = i.studentid
+join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
 where infraction IS NULL
 
@@ -134,7 +134,7 @@ i.studentschoolid as student_number
 5 errorid
 from custom.custom_dlincidents_raw
 join custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
-join powerschool.powerschool_schools sch on sch.school_number = i.studentid
+join powerschool.powerschool_schools sch on sch.school_number = sb.psschoolid
 join powerschool.powerschool_students s on s.student_number = i.studentschoolid
 where injurytype IS NULL 
 and infraction in ('Bullying', 'Fighting', 'Sexual Misconduct or Harrassment', 
