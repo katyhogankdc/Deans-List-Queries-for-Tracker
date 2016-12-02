@@ -13,7 +13,7 @@ i.studentschoolid as student_number
 ,i.gradelevelshort as grade_level
 ,s.lastfirst as lastfirst
 ,'Overlapping OSS' as error, 
-'DeansList' as sourcesystem
+'DeansList' as sourcesystem,
 1 ERRORID 
 from
 custom.custom_dlincidents_raw i 
@@ -49,7 +49,7 @@ i.studentschoolid as student_number
 ,s.lastfirst as lastfirst
 ,'1 incident ID with multiple incidents' as error
 ,'DeansList' as sourcesystem
-,count(i.incidentid) as numoccurences
+,count(i.incidentid) as numoccurences,
 2 error id 
 from
 custom.custom_dlincidents_raw i 
@@ -75,7 +75,7 @@ i.studentschoolid as student_number
 ,i.gradelevelshort as grade_level
 ,s.lastfirst as lastfirst
 ,'Unresolved referrals older than 30 days' as error
-,'DeansList' as sourcesystem
+,'DeansList' as sourcesystem,
 3 errorid
 from
 custom.custom_dlincidents_raw i 
@@ -100,7 +100,7 @@ i.studentschoolid as student_number
 ,i.gradelevelshort as grade_level
 ,s.lastfirst as lastfirst
 ,'Missing Infraction' as error
-,'DeansList' as sourcesystem
+,'DeansList' as sourcesystem,
 ,incidentid
 4 errorid
 from custom.custom_dlincidents_raw
@@ -123,7 +123,7 @@ i.studentschoolid as student_number
 ,i.gradelevelshort as grade_level
 ,s.lastfirst as lastfirst
 ,'Missing injury type' as error
-,'DeansList' as sourcesystem
+,'DeansList' as sourcesystem,
 5 errorid
 from custom.custom_dlincidents_raw
 join custom_dlschoolbridge sb on sb.dlschoolid = i.schoolid
